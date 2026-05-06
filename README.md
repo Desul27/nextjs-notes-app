@@ -6,21 +6,29 @@ A modern full-stack notes application built with Next.js App Router, featuring c
 
 👉 https://nextjs-notes-app-seven.vercel.app/
 
-✨ Features
-📝 Create, Read, Update, Delete (CRUD) Notes
-⚡ Fast API Routes with Next.js App Router
-🌙 Dark Mode (no flicker, system-aware)
+## ✨ Features
+
+- Create, Read, Update, Delete Notes
+- REST API with Next.js Route Handlers
+- PostgreSQL Database (Supabase)
+- Prisma ORM
+- Dark Mode
+- Responsive UI
+- Online Deployment with Vercel
+
 🎯 Smooth UX:
 Auto-focus input
 Enter to submit
 Inline edit experience
 🧩 Component-based architecture (e.g., NoteItem)
 🔄 Real-time UI updates (no refresh needed)
+
 🛠 Tech Stack
 Framework: Next.js (App Router)
-Database: Prisma + SQLite (dev)
-Styling: Tailwind CSS
+Database: Prisma ORM + PostgreSQL (Supabase)
+Styling: CSS Modules / Vanilla CSS
 Deployment: Vercel
+
 📂 Project Structure (Simplified)
 app/
  ├── api/notes        # API routes (CRUD)
@@ -29,6 +37,8 @@ components/
  └── NoteItem.tsx     # Note component
 lib/
  └── prisma.ts        # Prisma client
+
+
 ⚙️ Getting Started
 1. Clone repo
 git clone https://github.com/Desul27/nextjs-notes-app.git
@@ -39,6 +49,8 @@ npm install
 npx prisma migrate dev
 4. Run development server
 npm run dev
+npx prisma generate
+npm run dev
 🌍 Deployment
 
 This project is deployed on Vercel.
@@ -48,16 +60,16 @@ To deploy your own:
 Push project to GitHub
 Import to Vercel
 Deploy
-⚠️ Notes
-Current setup uses SQLite (development only)
-Production database migration (PostgreSQL) is planned
-📌 Future Improvements
-🔐 Authentication (NextAuth / Clerk)
-🐘 PostgreSQL migration (Neon / Supabase)
-📱 Mobile responsiveness improvements
-🧪 Testing (unit & integration)
-👤 Author
 
+⚠️ Notes
+## 🚧 Future Improvements
+- Authentication
+- Row Level Security (RLS)
+- User-specific notes
+- Better mobile experience
+- Toast notifications
+
+👤 Author
 Dede Sulaeni
 
 💡 Why this project?
