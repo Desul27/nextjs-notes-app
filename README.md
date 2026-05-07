@@ -1,10 +1,12 @@
-📝 Next.js Notes App
+# 📝 Next.js Notes App
 
-A modern full-stack notes application built with Next.js App Router, featuring clean UI, smooth UX, and a solid backend setup.
+A modern full-stack notes application built with Next.js App Router and PostgreSQL.
 
-🚀 Live Demo
+## 🚀 Live Demo
 
-👉 https://nextjs-notes-app-seven.vercel.app/
+https://nextjs-notes-app-seven.vercel.app/
+
+---
 
 ## ✨ Features
 
@@ -16,42 +18,31 @@ A modern full-stack notes application built with Next.js App Router, featuring c
 - Responsive UI
 - Online Deployment with Vercel
 
-🎯 Smooth UX:
-Auto-focus input
-Enter to submit
-Inline edit experience
-🧩 Component-based architecture (e.g., NoteItem)
-🔄 Real-time UI updates (no refresh needed)
+---
 
-🛠 Tech Stack
-Framework: Next.js (App Router)
-Database: Prisma ORM + PostgreSQL (Supabase)
-Styling: CSS Modules / Vanilla CSS
-Deployment: Vercel
+## 🛠 Tech Stack
 
-📂 Project Structure (Simplified)
-app/
- ├── api/notes        # API routes (CRUD)
- ├── page.tsx         # Main UI
-components/
- └── NoteItem.tsx     # Note component
-lib/
- └── prisma.ts        # Prisma client
+- Next.js (App Router)
+- Prisma ORM
+- PostgreSQL (Supabase)
+- Vanilla CSS
+- Vercel Deployment
 
+---
 
-⚙️ Getting Started
-1. Clone repo
-git clone https://github.com/Desul27/nextjs-notes-app.git
-cd nextjs-notes-app
-2. Install dependencies
+## ⚙️ Getting Started
+
+### Install dependencies
+
+bash
 npm install
-3. Setup database
-npx prisma migrate dev
-4. Run development server
-npm run dev
 npx prisma generate
 npm run dev
-🌍 Deployment
+
+🔑 Environment Variables
+Create a .env file and add:
+DATABASE_URL="your_postgresql_connection_url"
+
 
 This project is deployed on Vercel.
 
@@ -68,6 +59,9 @@ Deploy
 - User-specific notes
 - Better mobile experience
 - Toast notifications
+
+## 📸 Preview
+![App Preview](./public/preview.png)
 
 👤 Author
 Dede Sulaeni
