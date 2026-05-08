@@ -100,6 +100,7 @@ useEffect(() => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
+        
         {loading && <p>Loading...</p>}
         <h1 className={styles.title}>Notes App</h1>
         <div className={styles.inputGroup}>
