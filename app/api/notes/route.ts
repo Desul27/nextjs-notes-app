@@ -1,10 +1,19 @@
 import { prisma } from "@/lib/prisma";
-export async function GET() {
-  const notes = await prisma.note.findMany({
-    orderBy: { id: "desc" },
-  });
+
+export async function GET(req: Request) {
+const { searchParams } = new URL(req.url);
+const userId = searchParams.get("userId");
+
+const notes = await prisma.note.findMany({
+  where: {
+    userId: userId || "",
+  },
+  orderBy: { id: "desc" },
+});
+
   return Response.json(notes);
 }
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();

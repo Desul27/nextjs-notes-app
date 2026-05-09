@@ -19,24 +19,22 @@ export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState<any>(null);
 
-  useEffect(() => {
+useEffect(() => {
+  if (!user) return;
   const fetchNotes = async () => {
-     setLoading(true);  
+    setLoading(true);
     try {
-      const res = await fetch("/api/notes");
+      const res = await fetch(`/api/notes?userId=${user.id}`);
       const data = await res.json();
       setNotes(data);
-      
     } catch (err) {
       setError("Gagal fetch notes");
     } finally {
       setLoading(false);
-  
     }
   };
-
   fetchNotes();
-}, []);  
+}, [user]); 
 
 useEffect(() => {
   const timer = setTimeout(() => {
