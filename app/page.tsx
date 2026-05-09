@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import { useEffect, useRef, useState} from "react";
-
+import { supabase } from "@/lib/supabase";
 import NoteItem from "./components/NoteItem"; // Import
 
 type Note = {
@@ -17,6 +17,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
   const fetchNotes = async () => {
@@ -45,6 +46,19 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, []);
 
+useEffect(() => {
+  async function getUser() {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    setUser(user);
+  }
+
+  getUser();
+}, []);
+
+
   const handleAdd = async () => {
     if (!title) return;
     const res = await fetch("/api/notes", {
@@ -52,7 +66,10 @@ useEffect(() => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({
+      title,
+      userId: user?.id,
+      }),
     });
     const newNote = await res.json();
     setNotes((prev) => [...prev, newNote]);
@@ -93,9 +110,7 @@ useEffect(() => {
     inputRef.current?.focus();
   };
 
-
   if (error) return <p>{error}</p>;
- 
 
   return (
     <div className={styles.container}>

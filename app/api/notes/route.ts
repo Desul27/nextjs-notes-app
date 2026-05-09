@@ -1,19 +1,19 @@
 import { prisma } from "@/lib/prisma";
-
 export async function GET() {
   const notes = await prisma.note.findMany({
     orderBy: { id: "desc" },
   });
-
   return Response.json(notes);
 }
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
     const note = await prisma.note.create({
-      data: { title: body.title },
+      data: {
+        title: body.title,
+        userId: body.userId,
+      },
     });
 
     return Response.json(note);
@@ -27,7 +27,6 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
   const { id } = await req.json();
-
   await prisma.note.delete({
     where: { id },
   });
