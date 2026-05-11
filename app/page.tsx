@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { useEffect, useRef, useState} from "react";
 import { supabase } from "@/lib/supabase";
 import NoteItem from "./components/NoteItem"; // Import
+import { useRouter } from "next/navigation";
 
 type Note = {
   id: number;
@@ -18,6 +19,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState<any>(null);
+  const router = useRouter();
 
 useEffect(() => {
   if (!user) return;
@@ -49,7 +51,10 @@ useEffect(() => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-
+    if (!user) {
+       router.push("/auth");
+      return;
+      }
     setUser(user);
   }
 
@@ -113,10 +118,33 @@ useEffect(() => {
     inputRef.current?.focus();
   };
 
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+
+  router.push("/auth");
+};
+
+
   if (error) return <p>{error}</p>;
 
   return (
     <div className={styles.container}>
+     {user && (
+  <div style={{ marginBottom: "1.5rem" }}>
+    <h2 style={{ marginBottom: "0.5rem" }}>
+      Welcome Back 👋
+    </h2>
+
+    <p style={{ marginBottom: "1rem", opacity: 0.8 }}>
+      Logged in as: {user.email}
+    </p>
+
+    <button onClick={handleLogout}>
+      Logout
+    </button>
+  </div>
+)}
+     
       <div className={styles.card}>
         
         {loading && <p>Loading...</p>}

@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
-
+import { useRouter } from "next/navigation";
 export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState<any>(null);
+  const router = useRouter();
   
   useEffect(() => {
   async function getUser() {
@@ -31,8 +32,7 @@ export default function AuthPage() {
       alert(error.message);
       return;
     }
-
-    alert("Signup success! Check your email.");
+   router.push("/");
   }
 
   async function signIn() {
@@ -45,13 +45,12 @@ export default function AuthPage() {
       alert(error.message);
       return;
     }
-
-    alert("Login success!");
+    router.push("/");
   }
 
   async function signOut() {
     await supabase.auth.signOut();
-    alert("Logged out!");
+    router.push("/auth");
   }
 
   return (
