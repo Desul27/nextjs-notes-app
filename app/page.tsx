@@ -81,7 +81,10 @@ useEffect(() => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({
+       id,
+      userId: user?.id,
+      }),
     });
     setNotes((prev) => prev.filter((note) => note.id !== id));
     inputRef.current?.focus();
@@ -98,7 +101,9 @@ useEffect(() => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, title: editText }),
+      body: JSON.stringify({ id,
+        title: editText,
+        userId: user?.id, }),
     });
     setNotes((prev) =>
       prev.map((note) => (note.id === id ? { ...note, title: editText } : note))
