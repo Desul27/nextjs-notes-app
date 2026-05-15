@@ -32,7 +32,7 @@ export default function AuthPage() {
       alert(error.message);
       return;
     }
-   router.push("/");
+window.location.href = "/";
   }
 
   async function signIn() {
@@ -45,7 +45,7 @@ export default function AuthPage() {
       alert(error.message);
       return;
     }
-    router.push("/");
+ window.location.href = "/";
   }
 
   async function signOut() {
