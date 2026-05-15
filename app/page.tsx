@@ -129,22 +129,7 @@ const handleLogout = async () => {
 
   return (
     <div className={styles.container}>
-     {user && (
-  <div style={{ marginBottom: "1.5rem" }}>
-    <h2 style={{ marginBottom: "0.5rem" }}>
-      Welcome Back 👋
-    </h2>
-
-    <p style={{ marginBottom: "1rem", opacity: 0.8 }}>
-      Logged in as: {user.email}
-    </p>
-
-    <button onClick={handleLogout}>
-      Logout
-    </button>
-  </div>
-)}
-     
+    
       <div className={styles.card}>
         
         {loading && <p>Loading...</p>}

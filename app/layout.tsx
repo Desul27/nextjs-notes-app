@@ -1,6 +1,8 @@
 import "./globals.css";
 import ThemeToggle from "./components/ThemeToggle";
 import Script from "next/script";
+import Navbar from "./components/Navbar";
+
 export default function RootLayout({
   children,
 }: {
@@ -29,7 +31,7 @@ export default function RootLayout({
         <div style={{ padding: 20 }}>
           <ThemeToggle />
         </div>
-
+        <Navbar />
         {children}
       </body>
     </html>
