@@ -2,6 +2,7 @@ import "./globals.css";
 import ThemeToggle from "./components/ThemeToggle";
 import Script from "next/script";
 import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
   children,
@@ -32,6 +33,7 @@ export default function RootLayout({
           <ThemeToggle />
         </div>
         <Navbar />
+         <Toaster position="top-center" />
         {children}
       </body>
     </html>

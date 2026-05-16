@@ -4,6 +4,7 @@ import { useEffect, useRef, useState} from "react";
 import { supabase } from "@/lib/supabase";
 import NoteItem from "./components/NoteItem"; // Import
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type Note = {
   id: number;
@@ -31,6 +32,7 @@ useEffect(() => {
       setNotes(data);
     } catch (err) {
       setError("Gagal fetch notes");
+      toast.error("Failed to fetch notes");
     } finally {
       setLoading(false);
     }
@@ -77,6 +79,7 @@ useEffect(() => {
     const newNote = await res.json();
     setNotes((prev) => [...prev, newNote]);
     setTitle("");
+    toast.success("Note added!");
     inputRef.current?.focus();
   };
 
@@ -93,6 +96,7 @@ useEffect(() => {
     });
     setNotes((prev) => prev.filter((note) => note.id !== id));
     inputRef.current?.focus();
+    toast.success("Note deleted!");
   };
 
   const handleEdit = (note: Note) => {
@@ -115,16 +119,24 @@ useEffect(() => {
     );
     setEditingId(null);
     setEditText("");
+    toast.success("Note updated!");
     inputRef.current?.focus();
   };
-
-const handleLogout = async () => {
-  await supabase.auth.signOut();
-
-  router.push("/auth");
-};
-
-
+if (loading) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "60vh",
+        opacity: 0.7,
+      }}
+    >
+      <p>Loading notes...</p>
+    </div>
+  );
+}
   if (error) return <p>{error}</p>;
 
   return (
@@ -151,8 +163,14 @@ const handleLogout = async () => {
             Tambah
           </button>
         </div>
+
         {notes.length === 0 ? (
-          <p className={styles.empty}>Belum ada catatan</p>) : ( 
+        <div style={{ marginTop: "2rem", opacity: 0.7, textAlign: "center",}}>
+          <h3>No notes yet ✨</h3>
+       <p>
+          Start by creating your first note.
+        </p>
+         </div>) : ( 
           <ul className={styles.list}>
           {notes.map((note) => (
             <NoteItem
