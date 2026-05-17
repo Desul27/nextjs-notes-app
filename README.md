@@ -139,8 +139,9 @@ npm install
 Create `.env` file:
 
 ```env
-DATABASE_URL="postgresql://postgres.muuvpzpgdfbpunfvpikf"
+DATABASE_URL="postgresql://postgres.muuvpzpgdfbpunfvpikf:secretpassword@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require"
 NEXT_PUBLIC_SUPABASE_URL="https://muuvpzpgdfbpunfvpikf.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="sb_publishable_UlqiQ_8zQ6yTcNVmkXsvtQ_qGsZZ3kA"
 
 ```
 
