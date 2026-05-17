@@ -5,40 +5,25 @@ import { supabase } from "@/lib/supabase";
 import NoteItem from "./components/NoteItem"; // Import
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useNotes, type Note } from "./hooks/useNotes";
 
-type Note = {
-  id: number;
-  title: string;
-};
 
 export default function Home() {
-  const [notes, setNotes] = useState<Note[]>([]);
   const [title, setTitle] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [user, setUser] = useState<any>(null);
   const router = useRouter();
+const {
+  notes,
+  loading,
+  error,
+  addNote,
+  deleteNote,
+  updateNote,
+} = useNotes(user?.id);
 
-useEffect(() => {
-  if (!user) return;
-  const fetchNotes = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/notes?userId=${user.id}`);
-      const data = await res.json();
-      setNotes(data);
-    } catch (err) {
-      setError("Gagal fetch notes");
-      toast.error("Failed to fetch notes");
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchNotes();
-}, [user]); 
 
 useEffect(() => {
   const timer = setTimeout(() => {
@@ -65,63 +50,37 @@ useEffect(() => {
 
 
   const handleAdd = async () => {
-    if (!title) return;
-    const res = await fetch("/api/notes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-      title,
-      userId: user?.id,
-      }),
-    });
-    const newNote = await res.json();
-    setNotes((prev) => [...prev, newNote]);
-    setTitle("");
-    toast.success("Note added!");
-    inputRef.current?.focus();
-  };
+  if (!title || !user?.id) return;
+  await addNote(title, user.id);
+  toast.success("Note added!");
+  setTitle("");
+  inputRef.current?.focus();
+};
 
-  const handleDelete = async (id: number) => {
-    await fetch("/api/notes", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-       id,
-      userId: user?.id,
-      }),
-    });
-    setNotes((prev) => prev.filter((note) => note.id !== id));
-    inputRef.current?.focus();
-    toast.success("Note deleted!");
-  };
-
+const handleDelete = async (id: number) => {
+  if (!user?.id) return;
+  await deleteNote(id, user.id);
+  toast.success("Note deleted!");
+  inputRef.current?.focus();
+};
   const handleEdit = (note: Note) => {
     setEditingId(note.id);
     setEditText(note.title);
   };
 
-  const handleSave = async (id: number) => {
-    await fetch("/api/notes", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id,
-        title: editText,
-        userId: user?.id, }),
-    });
-    setNotes((prev) =>
-      prev.map((note) => (note.id === id ? { ...note, title: editText } : note))
-    );
-    setEditingId(null);
-    setEditText("");
-    toast.success("Note updated!");
-    inputRef.current?.focus();
-  };
+const handleSave = async (id: number) => {
+  if (!user?.id) return;
+  await updateNote(
+    id,
+    editText,
+    user.id
+  );
+  toast.success("Note updated!");
+  setEditingId(null);
+  setEditText("");
+   inputRef.current?.focus();
+};
+
 if (loading) {
   return (
     <div

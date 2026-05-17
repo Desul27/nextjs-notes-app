@@ -1,71 +1,186 @@
 # 📝 Next.js Notes App
 
-A modern full-stack notes application built with Next.js App Router and PostgreSQL.
+A modern fullstack Notes Application built with Next.js App Router, Prisma, Supabase Authentication, and PostgreSQL.
 
-## 🚀 Live Demo
-
-https://nextjs-notes-app-seven.vercel.app/
+This project was created as a learning journey to deeply understand modern fullstack web development concepts such as authentication, authorization, database ownership, SSR hydration, reusable architecture, and deployment workflows.
 
 ---
 
-## ✨ Features
+# 🚀 Live Demo
 
-- Create, Read, Update, Delete Notes
-- REST API with Next.js Route Handlers
-- PostgreSQL Database (Supabase)
-- Prisma ORM
-- Dark Mode
-- Responsive UI
-- Online Deployment with Vercel
+🔗 [https://nextjs-notes-app-seven.vercel.app]
 
 ---
 
-## 🛠 Tech Stack
+# ✨ Features
 
-- Next.js (App Router)
-- Prisma ORM
-- PostgreSQL (Supabase)
-- Vanilla CSS
-- Vercel Deployment
+## 🔐 Authentication
+
+* User Sign Up
+* User Login
+* User Logout
+* Session Persistence
+* Realtime Auth State
+
+## 📝 Notes Management
+
+* Create Notes
+* Edit Notes
+* Delete Notes
+* Per-user Notes Isolation
+* Notes ordered by latest first
+
+## 🛡️ Security
+
+* Authorization checks for update/delete
+* Supabase Row Level Security (RLS)
+* Protected user ownership flow
+
+## 🎨 User Experience
+
+* Global Navbar
+* Toast Notifications
+* Empty State UI
+* Loading State UI
+* Smooth Auth Redirect Flow
+
+## 🏗️ Architecture
+
+* Custom React Hooks
+* Reusable Components
+* Separation of UI and Business Logic
+* API Route Structure
 
 ---
 
-## ⚙️ Getting Started
+# 🧰 Tech Stack
 
-### Install dependencies
+## Frontend
 
-bash
+* Next.js 16 (App Router)
+* React
+* TypeScript
+
+## Backend
+
+* Next.js API Routes
+* Prisma ORM
+
+## Database & Auth
+
+* PostgreSQL
+* Supabase Authentication
+* Supabase RLS Policies
+
+## Deployment
+
+* Vercel
+
+## UI & Utilities
+
+* react-hot-toast
+
+---
+
+# 📂 Project Structure
+
+```bash
+app/
+ ├── api/
+ ├── auth/
+ ├── components/
+ ├── hooks/
+ ├── layout.tsx
+ └── page.tsx
+
+lib/
+ ├── prisma.ts
+ └── supabase.ts
+
+prisma/
+ └── schema.prisma
+```
+
+---
+
+# 🧠 What I Learned
+
+This project helped me understand:
+
+* Fullstack application architecture
+* Authentication & session flow
+* Authorization & ownership security
+* CRUD operations with Prisma
+* Database relationships and RLS
+* Client vs Server rendering concepts
+* React custom hooks architecture
+* Production deployment & debugging
+* Environment variables management
+* SSR hydration issues in Next.js
+
+---
+
+# ⚙️ Local Development
+
+## 1️⃣ Clone repository
+
+```bash
+git clone https://github.com/Desul27/nextjs-notes-app.git
+```
+
+## 2️⃣ Install dependencies
+
+```bash
 npm install
-npx prisma generate
+```
+
+## 3️⃣ Setup environment variables
+
+Create `.env` file:
+
+```env
+DATABASE_URL="postgresql://postgres.muuvpzpgdfbpunfvpikf"
+NEXT_PUBLIC_SUPABASE_URL="https://muuvpzpgdfbpunfvpikf.supabase.co"
+
+```
+
+## 4️⃣ Push Prisma schema
+
+```bash
+npx prisma db push
+```
+
+## 5️⃣ Run development server
+
+```bash
 npm run dev
+```
 
-🔑 Environment Variables
-Create a .env file and add:
-DATABASE_URL="your_postgresql_connection_url"
+---
 
+# 📸 Screenshot
 
-This project is deployed on Vercel.
+![Notes App Preview](public/preview.png)
 
-To deploy your own:
+---
 
-Push project to GitHub
-Import to Vercel
-Deploy
+# 📌 Future Improvements
 
-⚠️ Notes
-## 🚧 Future Improvements
-- Authentication
-- Row Level Security (RLS)
-- User-specific notes
-- Better mobile experience
-- Toast notifications
+* Search Notes
+* Categories / Tags
+* Rich Text Editor
+* Profile Avatar
+* Mobile UI Improvements
+* Middleware-based SSR Auth Protection
 
-## 📸 Preview
-![App Preview](./public/preview.png)
+---
 
-👤 Author
-Dede Sulaeni
+# 🙌 Acknowledgements
 
-💡 Why this project?
+Built with modern web technologies while learning fullstack development step by step.
 
-This project was built to practice full-stack development using Next.js App Router, focusing on clean architecture, user experience, and real-world deployment workflow.
+---
+
+# 📄 License
+
+This project is open-source and available for learning purposes.
